@@ -1,0 +1,7 @@
+Django==4.2
+dj_database_url
+Pillow
+psycopg2-binary
+requests
+dotenv
+numpy

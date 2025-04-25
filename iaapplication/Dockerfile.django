@@ -1,0 +1,38 @@
+# FROM python:3.9
+
+# WORKDIR /iaaplication
+
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
+
+# COPY . /iaaplication
+
+# # Ejecutar las migraciones
+# RUN python manage.py makemigrations --noinput
+# RUN python manage.py migrate --noinput
+
+# # Crear el superusuario (se te pedirá la información en el momento de la construcción)
+# RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('${DJANGO_SUPERUSER_USERNAME}', '${DJANGO_SUPERUSER_EMAIL}', '${DJANGO_SUPERUSER_PASSWORD}')" | python manage.py shell
+
+
+# # Configurar para ejecutar Django
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+FROM python:3.9
+
+WORKDIR /iaaplication
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . /iaaplication
+
+# Script de entrada para ejecutar comandos al inicio
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Configurar para ejecutar el script de entrada
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Comando por defecto si el script de entrada no ejecuta nada más
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

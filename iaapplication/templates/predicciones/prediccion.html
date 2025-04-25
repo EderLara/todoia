@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}             <!-- Extendemos de este archivo para los estilos -->
+{% block titulo %}Sistema de reconocimiento AI{% endblock %}
+
+{% block contenido %}
+    <section class="container">
+        <div class="row">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col-12">
+                    {{ formulario.imagen }}
+                </div>
+                <div class="col-6">
+                    <button class="btn bnt-outline-success btn-lg">Enviar</button>
+                </div>
+            </form>
+
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
+            {% if mensaje_url %}
+                <p style="color: green;">{{ mensaje_url }}</p>
+            {% endif %}
+            
+            {% if prediccion %}
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col">
+                            <h2>Resultado de la Predicción:</h2>
+                            <p>Clase Predicha: {{ prediccion }}</p>
+                            <p>Confianza: {{ confianza|floatformat:2 }}%</p>
+                        </div>
+                        <div class="col">
+                            {% if imagen_preprocesada %}
+                            <h3>Imagen preprocesada:</h3>
+                            <img src="{{ imagen_preprocesada }}" alt="Imagen Preprocesada" style="max-width: 300px;">
+                        {% endif %}
+                        </div>
+                        <div class="col">
+                            {% if imagen_url %}
+                            <h3>Imagen Subida:</h3>
+                            <img src="{{ imagen_url }}" alt="Imagen Predicha" style="max-width: 300px;">
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>               
+            {% endif %}
+        </div>
+    </section>
+
+
+{% endblock %}

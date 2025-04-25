@@ -1,0 +1,55 @@
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django-specific ignores
+*.log
+*.pot
+/iaapplication/static*
+/iaapplication/media*
+/iaapplication/venv/
+/iaapplication/*.sqlite3
+/iaapplication/migrations/*
+!/iaapplication/migrations/__init__.py
+
+# Flask-specific ignores (si tienes un entorno virtual para la API)
+/iamodel/venv/
+
+# Environment files
+.env
+.flaskenv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+*.pyd
+
+# Distribution / packaging
+.Python
+env/
+build/
+dist/
+sdist/
+*.egg-info/
+.installed.cfg
+*.whl
+MANIFEST
+
+# Editor-specific files (puedes comentar/eliminar los que no uses)
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Docker-related (opcional, si no quieres trackear logs de contenedores localmente)
+docker-compose.override.yml
+*.log

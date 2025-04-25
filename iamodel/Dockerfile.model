@@ -1,0 +1,12 @@
+FROM python:3.9-slim-buster
+
+WORKDIR /iamodel
+
+COPY requirements_model.txt .
+RUN pip install -r requirements_model.txt
+
+COPY . /iamodel
+
+EXPOSE 5000
+
+CMD ["python", "api_model.py"]
