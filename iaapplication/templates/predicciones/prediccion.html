@@ -1,17 +1,21 @@
-{% extends 'core/base.html' %}             <!-- Extendemos de este archivo para los estilos -->
-{% block titulo %}Sistema de reconocimiento AI{% endblock %}
+{% extends 'core/base.html' %}
+{% block titulo %}Aplicación para evaluar un modelo{% endblock %}
 
 {% block contenido %}
-    <section class="container">
-        <div class="row">
+
+<section class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5 mb-3">
+            <h1>Predicción de números</h1>
+        </div>
+        <div class="col-12 text-center">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="col-12">
-                    {{ formulario.imagen }}
+                <div class="mb-3">
+                    <label for="numero" class="form-label">Número a predecir:</label>
+                    {{ formulario }}
                 </div>
-                <div class="col-6">
-                    <button class="btn bnt-outline-success btn-lg">Enviar</button>
-                </div>
+                <button type="submit" class="btn btn-primary">Predecir</button>
             </form>
 
             {% if error %}
@@ -46,7 +50,7 @@
                 </div>               
             {% endif %}
         </div>
-    </section>
-
+    </div>
+</section>
 
 {% endblock %}

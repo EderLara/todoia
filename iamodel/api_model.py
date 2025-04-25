@@ -8,11 +8,13 @@ import os
 app = Flask(__name__)
 
 # Cargar el modelo (asegúrate de que la ruta sea correcta dentro del contenedor)
-MODEL_PATH = 'model/best_mnist_model.h5'
+MODEL_PATH = './model/best_mnist_model.h5'
 if not os.path.exists(MODEL_PATH):
     print(f"Error: Modelo no encontrado en {MODEL_PATH}")
     exit()
 model = tf.keras.models.load_model(MODEL_PATH)
+model.compile_metrics = [tf.keras.metrics.CategoricalAccuracy()]
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 def preprocess_image(image_bytes):
     img = Image.open(io.BytesIO(image_bytes)).convert('L')
